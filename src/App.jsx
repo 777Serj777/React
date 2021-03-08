@@ -2,16 +2,19 @@ import {Header} from "./component/Header";
 import {ListUsers} from "./component/Users";
 import {ModalWindow} from "./component/ModalWindow";
 import {userData} from "./bd/userData";
-import { useState} from "react";
+import React, {useState, useEffect} from "react";
 
 
 function Wrapper(props) {
 
   const {arrUsers}  = props;
-  const [state, setState] = useState({});
-  const [user, setUser] = useState(undefined);
+  const [state, setState] = useState({age: 'any'});
+  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState(arrUsers);
 
-  let users = arrUsers.filter(user => {
+  const cbFilterUsers = () => {
+  
+    let users =  arrUsers.filter(user => {
 
       for (const key in state) {
 
@@ -23,37 +26,49 @@ function Wrapper(props) {
           }
           case 'age': {
             if(+state[key] === user.age) break;
+            if(state[key] === 'any') break;
             return false;
           }
         }      
       }
       return true;
-  });
+    });
+
+    setUsers(users);
+  }
+
+  useEffect(cbFilterUsers, [state]);
  
-  function searchUserByAge(e) {
+  const handleSearchUserByAge = e => {
     setState({ ...state, age : e.target.value}); 
   }
   
-  function searchUserByName(e) {
+  const handleSearchUserByName = e => {
     setState({...state, name: e.target.value});
   }
-  function resetState() {
+  const handleResetState = () => {
     setState({});
   }
   
-  function infoUser(user) {    
+  const handelInfoUser = user => {    
     setUser(user);   
   }
-  function closeModalWindow() {
+  const handelCloseModalWindow = () => {
     setUser(undefined);
   }
 
   return (
     <div className = "wrapper">
-      <Header inputValue = {state.name || ""} users = {userData} reset = {resetState} searchByAge = {searchUserByAge} searchByName = {searchUserByName}/>
+      <Header 
+        inputValue = {state.name || ""} 
+        users = {userData} 
+        reset = {handleResetState} 
+        searchByAge = {handleSearchUserByAge} 
+        searchByName = {handleSearchUserByName}
+      />
       <div className = "content">
-        <ListUsers clickUser = {infoUser} users = {users}/>
-        {(user) ? <ModalWindow user = {user} closeWindow = {closeModalWindow}/> : ""}
+        <ListUsers clickUser = {handelInfoUser} users = {users}/>
+        {(user) ? <ModalWindow user = {user} closeWindow = {handelCloseModalWindow}/> : null}
       </div>
     </div>
   )
