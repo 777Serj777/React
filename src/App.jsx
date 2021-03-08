@@ -50,10 +50,10 @@ function Wrapper(props) {
     setdataForFiltere({});
   }
   
-  const handelInfoUser = user => {    
+  const handleInfoUser = user => {    
     setUser(user);   
   }
-  const handelCloseModalWindow = () => {
+  const handleCloseModalWindow = () => {
     setUser(undefined);
   }
 
@@ -67,8 +67,8 @@ function Wrapper(props) {
         searchByName = {handleSearchUserByName}
       />
       <div className = "content">
-        <ListUsers clickUser = {handelInfoUser} users = {users}/>
-        {(user) ? <ModalWindow user = {user} closeWindow = {handelCloseModalWindow}/> : null}
+        <ListUsers clickUser = {handleInfoUser} users = {users}/>
+        {(user) ? <ModalWindow user = {user} closeWindow = {handleCloseModalWindow}/> : null}
       </div>
     </div>
   )
