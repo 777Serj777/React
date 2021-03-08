@@ -2,58 +2,73 @@ import {Header} from "./component/Header";
 import {ListUsers} from "./component/Users";
 import {ModalWindow} from "./component/ModalWindow";
 import {userData} from "./bd/userData";
-import { useState} from "react";
+import React, {useState, useEffect} from "react";
 
 
 function Wrapper(props) {
 
   const {arrUsers}  = props;
-  const [state, setState] = useState({});
-  const [user, setUser] = useState(undefined);
+  const [dataForFilter, setdataForFiltere] = useState({age: 'any'});
+  const [user, setUser] = useState(null);
+  const [users, setUsers] = useState(arrUsers);
 
-  let users = arrUsers.filter(user => {
+  const cbFilterUsers = () => {
+  
+    let users =  arrUsers.filter(user => {
 
-      for (const key in state) {
+      for (const key in dataForFilter) {
 
         switch(key){
           case 'name': {
-            let reg = new RegExp(`^${state[key]}`, 'i');
+            let reg = new RegExp(`^${dataForFilter[key]}`, 'i');
             if(reg.test(user.name)) break;
             return false; 
           }
           case 'age': {
-            if(+state[key] === user.age) break;
+            if(+dataForFilter[key] === user.age) break;
+            if(dataForFilter[key] === 'any') break;
             return false;
           }
         }      
       }
       return true;
-  });
+    });
+
+    setUsers(users);
+  }
+
+  useEffect(cbFilterUsers, [dataForFilter]);
  
-  function searchUserByAge(e) {
-    setState({ ...state, age : e.target.value}); 
+  const handleSearchUserByAge = e => {
+    setdataForFiltere({ ...dataForFilter, age : e.target.value}); 
   }
   
-  function searchUserByName(e) {
-    setState({...state, name: e.target.value});
+  const handleSearchUserByName = e => {
+    setdataForFiltere({...dataForFilter, name: e.target.value});
   }
-  function resetState() {
-    setState({});
+  const handleResetState = () => {
+    setdataForFiltere({});
   }
   
-  function infoUser(user) {    
+  const handelInfoUser = user => {    
     setUser(user);   
   }
-  function closeModalWindow() {
+  const handelCloseModalWindow = () => {
     setUser(undefined);
   }
 
   return (
     <div className = "wrapper">
-      <Header inputValue = {state.name || ""} users = {userData} reset = {resetState} searchByAge = {searchUserByAge} searchByName = {searchUserByName}/>
+      <Header 
+        inputValue = {dataForFilter.name || ""} 
+        users = {userData} 
+        reset = {handleResetState} 
+        searchByAge = {handleSearchUserByAge} 
+        searchByName = {handleSearchUserByName}
+      />
       <div className = "content">
-        <ListUsers clickUser = {infoUser} users = {users}/>
-        {(user) ? <ModalWindow user = {user} closeWindow = {closeModalWindow}/> : ""}
+        <ListUsers clickUser = {handelInfoUser} users = {users}/>
+        {(user) ? <ModalWindow user = {user} closeWindow = {handelCloseModalWindow}/> : null}
       </div>
     </div>
   )
