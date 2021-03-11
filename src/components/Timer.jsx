@@ -42,10 +42,10 @@ export function Timer(props) {
 
             nValue = Number(nValue)
        
-            accumulator += (index === 0) && (nValue * 60 * 60 * 1000) ;
-            accumulator += (index === 1) && (nValue * 60 * 1000) ;
-            accumulator += (index === 2) && (nValue * 1000) ;
-            accumulator += (index === 3) && nValue ;
+            accumulator += (index === 0) && (nValue * 60 * 60 * 1000) 
+            || (index === 1) && (nValue * 60 * 1000) 
+            || (index === 2) && (nValue * 1000) 
+            || (index === 3) && nValue;
             
             return accumulator; 
 
