@@ -1,0 +1,38 @@
+%btn{
+    outline: none;
+    border: none;
+    cursor: pointer; 
+    padding: 10px; 
+    font-size: 24px;
+    border-radius: 5px;
+    color: #fff
+
+}
+
+.timer__btn{
+
+    &:not(:last-of-type){
+        margin-right: 15px;
+    }
+
+    &:active{
+        transform: scale(.9);
+    }
+
+    &-start{
+        @extend%btn;
+        background-color: $bg-color-green;
+    }
+    &-reset{
+        @extend%btn;
+        background-color: $bg-color-orange;
+    }
+    &-stop{
+        @extend%btn;
+        background-color: $bg-color-red;
+    }
+    &-continue{
+        @extend%btn;
+        background-color: $bg-color-purple;
+    }
+}

@@ -1,0 +1,10 @@
+.timer{
+    display: flex;
+    font-size: 36px;
+    flex-direction: column;
+    align-items: center;
+   
+    &__list-time{
+        list-style: none;
+    }
+}
