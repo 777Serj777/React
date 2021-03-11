@@ -93,7 +93,7 @@ export function Timer(props) {
         
         <div className = "timer">
           
-            <p>{timer}</p> 
+            <p className = "timer__board">{timer}</p> 
             <div className = "timer__buttons">
               <Button 
                 className = {`timer__btn ${(btnClick === 'stop') ? "timer__btn-continue" : "timer__btn-start"}`}
@@ -114,7 +114,10 @@ export function Timer(props) {
               </Button>
             </div>
             <ul className = "timer__list-time">
-              {listTimer.map(time => <li key = {id++}>{time}</li>)}
+              {listTimer.map((time, index) =>{ 
+                let size = 48 / 100 * (75 - index*2)
+                return <li style = {{fontSize: size}} key = {id++}>{time}</li>
+              })}
             </ul>
           
         </div>
