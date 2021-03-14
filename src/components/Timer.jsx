@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import {Button} from './Button'
 
 const timerTick = (time, startTime) => {
-
+ 
   let hour, minute, second, milliseconds;
 
   let currentTime =  (Date.now() - startTime) + time;
@@ -27,17 +27,30 @@ export function Timer(props) {
     const [btnClick, setBtnClick] = useState('');
     const [listTimer, setListTimer] = useState([]);
 
+
     let id = 0;
     let startTimer;
 
     useEffect(() => {
- 
-      let nowTime = Date.now()
 
+      if(listTimer.length > 0){
+        localStorage.setItem('listTime', JSON.stringify(listTimer))
+      }
+      else if (JSON.parse(localStorage.getItem('listTime'))) {
+        setListTimer(JSON.parse(localStorage.getItem('listTime')));
+      }
+
+    }, [listTimer])
+
+
+    useEffect(() => {
+  
+      let nowTime = Date.now()
+   
       switch (btnClick) {
      
         case 'start': {
-        
+      
           let currentTime =  timer.split(/[\:\.]/g).reduce((accumulator, nValue, index) => {
 
             nValue = Number(nValue)
@@ -62,14 +75,18 @@ export function Timer(props) {
 
         case 'stop': {
            setListTimer([...listTimer, timer]);
+     
            break; 
         }
 
         case 'reset': {
           setListTimer([...listTimer, timer]);
+         
           setTimer(props.format);
           break;
         }
+
+     
       }
       
       return () => clearInterval(startTimer);
@@ -79,6 +96,7 @@ export function Timer(props) {
     const handleClickStop = () => {
         new Audio('e61cdb72dc8aa8c.mp3').play();
         (btnClick === 'start') && setBtnClick('stop');
+  
       }
       const handleClickStart = () => {
         new Audio('e61cdb72dc8aa8c.mp3').play();
@@ -87,6 +105,11 @@ export function Timer(props) {
       const handleClickReset = () => {
         new Audio('e61cdb72dc8aa8c.mp3').play();
         setBtnClick('reset');
+     
+      }
+      const handleClickClear = () => {
+        new Audio('e61cdb72dc8aa8c.mp3').play();
+        localStorage.clear()
       }
    
     return (
@@ -111,6 +134,12 @@ export function Timer(props) {
                 className = "timer__btn timer__btn-reset" 
                 handleClick = {handleClickReset}
                 >Reset
+              </Button>
+
+              <Button 
+                className = "timer__btn timer__btn-clear" 
+                handleClick = {handleClickClear}
+                >Clear
               </Button>
             </div>
             <ul className = "timer__list-time">

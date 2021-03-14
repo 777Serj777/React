@@ -23,6 +23,10 @@
         @extend%btn;
         background-color: $bg-color-green;
     }
+    &-clear{
+        @extend%btn;
+        background-color: $bg-color-blue;
+    }
     &-reset{
         @extend%btn;
         background-color: $bg-color-orange;
