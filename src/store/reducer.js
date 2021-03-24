@@ -10,6 +10,15 @@ export default function  reduser(state, action){
 
     return {
 
+        [actionType.CHANGE_THEME](){
+       
+            return { 
+                ...state, 
+                ...payload
+                
+            }
+         },
+
         [actionType.SET_URL](){
 
             return { 

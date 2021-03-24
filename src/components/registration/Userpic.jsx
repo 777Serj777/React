@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {RegistrationContext} from '../../context'
-import crateAction from '../../store/crateAction';
+import createAction from '../../store/createAction';
 
 
 let id = 0; 
@@ -28,8 +28,8 @@ let arrURL = [
         arrURL.map(arr => {
 
             return (
-                <div key = {id++} className = {`${props.classParent}__imgs`} >
-                    {arr.map( url => <img key = {id++} src={url} onClick = {(e) => dispatch(crateAction.setUrl(e.target.src))}/> )}
+                <div key = {'container'+id++} className = {`${props.classParent}__imgs`} >
+                    {arr.map( url => <img key = {'image'+id++} src={url} onClick = {(e) => dispatch(createAction.setUrl(e.target.src))}/> )}
                 </div>
             )
         })

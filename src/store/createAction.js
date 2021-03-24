@@ -30,17 +30,17 @@ export const checkValid = (listValid, {password, repeatPassword}) => {
 
     let values = Object.values(listValid);
 
-    let isValid = true;
+    let isAuth = true;
      
     values.forEach(item => {
-        if(!item.isValid) { isValid = false; return;}
+        if(!item.isValid) { isAuth = false; return;}
     })
 
-    isValid = (isValid) && (password === repeatPassword);
+    isAuth = (isAuth) && (password === repeatPassword);
     
     return {
         type: 'CHECK_VALID',
-        payload: {isValid}
+        payload: {isAuth}
     }
 }
 export const setUrl = (urlImg) => {
@@ -50,13 +50,24 @@ export const setUrl = (urlImg) => {
         payload: {urlImg}
     }
 }
+export const changeTheme = (themeDark) => {
+    
+    
+    themeDark = !themeDark;
+    
+    return {
+        type: 'CHANGE_THEME',
+        payload: {themeDark}
+    }
+}
 
-const crateAction = {
+const createAction = {
     addInfoUser,
     setValid,
     addPhotoUser,
     checkValid,
-    setUrl  
+    setUrl,
+    changeTheme  
 }
 
-export default crateAction; 
+export default createAction; 

@@ -3,7 +3,7 @@ import React from 'react';
 export const initialState = {
 
     step: 1,
-    isValid: false,
+    isAuth: false,
 
     valid:{
         name: {
@@ -36,8 +36,8 @@ export const initialState = {
         },
      
     },
-    theme: 'light',
-    
+    themeDark: false,
+
     infoUser: {
         name: "",
         surname: "",

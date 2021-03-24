@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {RegistrationContext} from '../../context'
-import crateAction from '../../store/crateAction'
+import createAction from '../../store/createAction'
 import {Input} from '../Input';
 import {Userpic} from '../registration/Userpic';
 import {Button} from '../Button';
@@ -13,7 +13,7 @@ export const StepsToRegister = (props) => {
     const {state, dispatch} = useContext(RegistrationContext);
 
     const {infoUser, valid} = state;
-    console.log(state);
+ 
     return (   
         <>  
         <legend className = "check-in__title">Шаг: {state.step}</legend>
@@ -31,8 +31,8 @@ export const StepsToRegister = (props) => {
                                 value = {infoUser.name || ""}
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({name: e.target.value}))
-                                    dispatch(crateAction.setValid({name: e.target.value}))
+                                    dispatch(createAction.addInfoUser({name: e.target.value}))
+                                    dispatch(createAction.setValid({name: e.target.value}))
                                 }}
 
                             />,
@@ -45,8 +45,8 @@ export const StepsToRegister = (props) => {
                                 value= {infoUser.surname || ""}
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) =>{ 
-                                    dispatch(crateAction.addInfoUser({surname: e.target.value})) 
-                                    dispatch(crateAction.setValid({surname: e.target.value}))
+                                    dispatch(createAction.addInfoUser({surname: e.target.value})) 
+                                    dispatch(createAction.setValid({surname: e.target.value}))
                                 }}                      
                             />,
                             <Input 
@@ -58,8 +58,8 @@ export const StepsToRegister = (props) => {
                                 value= {infoUser.email || ""}
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({email: e.target.value}))
-                                    dispatch(crateAction.setValid({email: e.target.value}))
+                                    dispatch(createAction.addInfoUser({email: e.target.value}))
+                                    dispatch(createAction.setValid({email: e.target.value}))
                                 }} 
                             />
                         ],
@@ -73,8 +73,8 @@ export const StepsToRegister = (props) => {
                                 value = {infoUser.city || ""}       
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({city: e.target.value}))
-                                    dispatch(crateAction.setValid({city: e.target.value}))
+                                    dispatch(createAction.addInfoUser({city: e.target.value}))
+                                    dispatch(createAction.setValid({city: e.target.value}))
                                 }}                         
                             />,
                             <Input 
@@ -86,8 +86,8 @@ export const StepsToRegister = (props) => {
                                 value= {infoUser.street || ""}  
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({street: e.target.value}))
-                                    dispatch(crateAction.setValid({street: e.target.value}))                               
+                                    dispatch(createAction.addInfoUser({street: e.target.value}))
+                                    dispatch(createAction.setValid({street: e.target.value}))                               
                                 }}                         
                             />,
                             <Input 
@@ -99,8 +99,8 @@ export const StepsToRegister = (props) => {
                                 value = {infoUser.house || ""} 
                                 classNameForWrap = {`${props.classParent}__text`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({house: e.target.value}))
-                                    dispatch(crateAction.setValid({house: e.target.value}))                             
+                                    dispatch(createAction.addInfoUser({house: e.target.value}))
+                                    dispatch(createAction.setValid({house: e.target.value}))                             
                                 }}                          
                             />
                         ],
@@ -112,7 +112,7 @@ export const StepsToRegister = (props) => {
                                 type = 'file'                            
                                 classNameForWrap = {`${props.classParent}__file`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addPhotoUser(e.target.files[0]))                              
+                                    dispatch(createAction.addPhotoUser(e.target.files[0]))                              
                                 }} 
                             />,
                            <Userpic key = {8} classParent = {props.classParent}/>
@@ -128,8 +128,8 @@ export const StepsToRegister = (props) => {
                                 value = {infoUser.password || ""}
                                 classNameForWrap = {`${props.classParent}__password`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({password: e.target.value}))
-                                    dispatch(crateAction.setValid({password: e.target.value}))                              
+                                    dispatch(createAction.addInfoUser({password: e.target.value}))
+                                    dispatch(createAction.setValid({password: e.target.value}))                              
                                 }}                                                              
                             />,
                             <Input 
@@ -141,8 +141,8 @@ export const StepsToRegister = (props) => {
                                 value = {infoUser.repeatPassword || ""}  
                                 classNameForWrap = {`${props.classParent}__password`}
                                 onChange = {(e) => {
-                                    dispatch(crateAction.addInfoUser({repeatPassword: e.target.value}))
-                                    dispatch(crateAction.setValid({repeatPassword: e.target.value}))                                
+                                    dispatch(createAction.addInfoUser({repeatPassword: e.target.value}))
+                                    dispatch(createAction.setValid({repeatPassword: e.target.value}))                                
                                 }}                                  
                             />
                         ],                                                
@@ -150,9 +150,9 @@ export const StepsToRegister = (props) => {
             }
         </div>
         <div className = 'check-in__wrap-btn'>
-            {(state.step !== 1 ) && <Button className = 'check-in__btn' onClick = {() => {dispatch({type: 'PREV_STEP'})}}>Previous</Button>}
-            {(state.step !== 4) && <Button className = 'check-in__btn' onClick = {() => {dispatch({type: 'NEXT_STEP'})}}>Next</Button>}  
-            {(state.step === 4) && <Button className = 'check-in__btn' onClick = {() => {dispatch(crateAction.checkValid(state.valid, state.infoUser))}}>Submit</Button>}
+            {(state.step !== 1 ) && <Button  className = 'check-in__btn' onClick = {() => {dispatch({type: 'PREV_STEP'})}}>Previous</Button>}
+            {(state.step !== 4) && <Button  className = 'check-in__btn' onClick = {() => {dispatch({type: 'NEXT_STEP'})}}>Next</Button>}  
+            {(state.step === 4) && <Button type = 'submit' className = 'check-in__btn' onClick = {() => {dispatch(createAction.checkValid(state.valid, state.infoUser))}}>Submit</Button>}
         </div> 
         </>
     )

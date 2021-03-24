@@ -8,7 +8,8 @@ const actionType = {
     SAVE_USER: 'SAVE_USER',
     SET_VALID: 'SET_VALID',
     CHECK_VALID: 'CHECK_VALID',
-    SET_URL: 'SET_URL'
+    SET_URL: 'SET_URL',
+    CHANGE_THEME: 'CHANGE_THEME' 
     
 }
 
