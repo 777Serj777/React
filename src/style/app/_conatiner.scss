@@ -1,0 +1,25 @@
+.container-app{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 104rem;
+    display: flex;
+    border: .2rem solid rgb(235, 157, 14);
+    padding: 2rem 2rem 1rem;
+    margin: 0 auto;
+}
+
+.column{
+
+    &-first{
+        flex: 1;
+        min-width: 60%;
+        padding: 2rem;
+    }
+
+    &-second{
+        flex: 1;
+        min-width: 31rem;
+        padding: 2rem;
+    }
+ 
+}

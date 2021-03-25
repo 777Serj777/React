@@ -1,0 +1,13 @@
+%btn {
+    
+    padding: .5rem 1rem;
+    background: transparent;
+    border:  .2rem solid rgb(204, 22, 150); 
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn{
+    @extend%btn;
+}

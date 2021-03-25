@@ -1,0 +1,42 @@
+%btn-timer{
+    outline: none;
+    border: none;
+    cursor: pointer; 
+    padding: 10px; 
+    font-size: 24px;
+    border-radius: 5px;
+    color: #fff
+
+}
+
+.timer__btn{
+
+    &:not(:last-of-type){
+        margin-right: 15px;
+    }
+
+    &:active{
+        transform: scale(.9);
+    }
+
+    &-start{
+        @extend%btn-timer;
+        background-color: $bg-color-green;
+    }
+    &-save{
+        @extend%btn-timer;
+        background-color: $bg-color-blue;
+    }
+    &-reset{
+        @extend%btn-timer;
+        background-color: $bg-color-orange;
+    }
+    &-stop{
+        @extend%btn-timer;
+        background-color: $bg-color-red;
+    }
+    &-cancel{
+        @extend%btn-timer;
+        background-color: $bg-color-purple;
+    }
+}

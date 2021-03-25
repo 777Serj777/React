@@ -1,0 +1,14 @@
+.winner-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: .2rem solid rgb(170, 21, 103);
+    padding: 2rem;
+    
+    h3{
+        margin-bottom: 2rem;
+    }
+    .btn{
+        width: fit-content;
+    }
+}

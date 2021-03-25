@@ -1,0 +1,30 @@
+.list-participants{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.card{
+    display: flex;
+    position: relative;
+    width: 12rem;
+    flex-direction: column;
+    border: .2rem solid rgb(228, 228, 14); 
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    &__user{
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        padding-left: .5rem;
+
+        &>p:not(:last-of-type){
+            margin-bottom: .5rem;
+        }
+        
+    }
+    &__delete-btn{
+        @extend%btn;
+    }
+}

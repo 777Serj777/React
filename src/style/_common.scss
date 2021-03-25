@@ -1,0 +1,12 @@
+html{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 0.625rem;
+}
+
+.wrapper{
+
+    &-particip{
+        border: .2rem solid rgb(11, 197, 221);
+        margin-bottom: 2rem;
+    }
+}

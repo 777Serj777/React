@@ -1,83 +1,50 @@
-import {Header} from "./component/Header";
-import {ListUsers} from "./component/Users";
-import {ModalWindow} from "./component/ModalWindow";
-import {userData} from "./bd/userData";
-import React, {useState, useEffect} from "react";
+import React from "react";
+import { connect, useSelector } from "react-redux";
+import Input from './components/Input'
+import UserCard from './components/UserCard'
+import Registration from './components/registration/Registration'
+import Timer from './components/newTimer/Timer'
+import WinnerInfo from "./components/WinnerInfo";
 
 
-function Wrapper(props) {
+const mapStateToProps = store => {
 
-  const {arrUsers}  = props;
-  const [state, setState] = useState({age: 'any'});
-  const [user, setUser] = useState(null);
-  const [users, setUsers] = useState(arrUsers);
-
-  const cbFilterUsers = () => {
-  
-    let users =  arrUsers.filter(user => {
-
-      for (const key in state) {
-
-        switch(key){
-          case 'name': {
-            let reg = new RegExp(`^${state[key]}`, 'i');
-            if(reg.test(user.name)) break;
-            return false; 
-          }
-          case 'age': {
-            if(+state[key] === user.age) break;
-            if(state[key] === 'any') break;
-            return false;
-          }
-        }      
-      }
-      return true;
-    });
-
-    setUsers(users);
+  return{
+    timer: store.timer.time
   }
-
-  useEffect(cbFilterUsers, [state]);
- 
-  const handleSearchUserByAge = e => {
-    setState({ ...state, age : e.target.value}); 
-  }
-  
-  const handleSearchUserByName = e => {
-    setState({...state, name: e.target.value});
-  }
-  const handleResetState = () => {
-    setState({});
-  }
-  
-  const handelInfoUser = user => {    
-    setUser(user);   
-  }
-  const handelCloseModalWindow = () => {
-    setUser(undefined);
-  }
-
-  return (
-    <div className = "wrapper">
-      <Header 
-        inputValue = {state.name || ""} 
-        users = {userData} 
-        reset = {handleResetState} 
-        searchByAge = {handleSearchUserByAge} 
-        searchByName = {handleSearchUserByName}
-      />
-      <div className = "content">
-        <ListUsers clickUser = {handelInfoUser} users = {users}/>
-        {(user) ? <ModalWindow user = {user} closeWindow = {handelCloseModalWindow}/> : null}
-      </div>
-    </div>
-  )
 }
 
-function App() {
+const mapDispatchToProps = dispatch => {
+
+  return {
+    setTime: value => {
+        dispatch({type: 'SET_TIME', payload: {time: value}})
+    }
+  }
+}
+
+const TimerWithState = connect(mapStateToProps, mapDispatchToProps)(Timer)
+
+function App(props) {
+
+  const isParticip = useSelector(store => store.registration.isParticip)
+  const participants = [[],[],[],[],[],[],[],[],[],[],[],[]] /**useSelector(store => store.participants.arrParticipants) */
 
   return (
-    <Wrapper arrUsers = {userData}/>
+    <div className = 'container-app'>
+      <div className = 'column-first'>
+         <Input className = 'search-particip'/>
+         <div className = 'list-participants'>
+            {participants.map(particip => <UserCard particip = {particip}/>)}
+         </div>
+      </div>
+      <div className = 'column-second'>
+        <div className = 'wrapper-particip'>
+          {(isParticip) ? <Timer/> : <Registration/>} 
+        </div>
+        <WinnerInfo/>
+      </div>
+    </div>
   )
 
 } 
