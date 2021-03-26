@@ -4,8 +4,11 @@ html{
 }
 
 .wrapper{
+ 
 
     &-particip{
+        display: flex;
+        min-height: 27.1rem;
         border: .2rem solid rgb(11, 197, 221);
         margin-bottom: 2rem;
     }

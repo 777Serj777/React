@@ -1,11 +1,11 @@
 import actionType from './actionType'
 
 const initState = {
-    arrParticipants: []
+    arrParticipants: [],
+    amountParticipants: 0
 }
 
 const participantsReducer = (state = initState, action) => {
-
 
     const {type, payload} = action;
 

@@ -4,6 +4,8 @@ const initState = {
     
     isParticip: false,
 
+    validData:false,
+
     participant: {
         id: '',
         name: '',
@@ -13,14 +15,30 @@ const initState = {
 
 const registrationReducer = (state = initState, action) => {
 
-
     const {type, payload} = action;
 
     return ({
-
-        [actionType.REGISTER_PARTICIPANT](){
+    
+     
+        [actionType.SET_VALIDATION](){
             return {
+                ...state,
                 ...payload
+            }
+        },
+        [actionType.REGISTER_PARTICIPANT](){
+
+            let id =  Math.floor(Math.random() * (100000 - 10000) + 10000);
+
+            return {
+
+                ...state,              
+                isParticip: true,
+
+                participant: {
+                    ...payload,
+                    id
+                }
             }
         }
      

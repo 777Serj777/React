@@ -28,7 +28,7 @@ const TimerWithState = connect(mapStateToProps, mapDispatchToProps)(Timer)
 function App(props) {
 
   const isParticip = useSelector(store => store.registration.isParticip)
-  const participants = [[],[],[],[],[],[],[],[],[],[],[],[]] /**useSelector(store => store.participants.arrParticipants) */
+  const participants = useSelector(store => store.participants.arrParticipants);
 
   return (
     <div className = 'container-app'>

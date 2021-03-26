@@ -16,6 +16,7 @@ const Winner = (props) => {
 
 const WinnerInfo = (props) => {
 
+
     return (
         <div className = 'winner-info'>
             {(false) ? <h3>The winner</h3> : <h3>Total participants: {}</h3>}

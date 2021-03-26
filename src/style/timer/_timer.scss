@@ -1,10 +1,46 @@
+
+
+
 .timer{
     display: flex;
+    position: relative;
+    width: 100%;
     font-size: 48px;
     flex-direction: column;
     align-items: center;
-    // border: .2rem solid rgb(23, 189, 134); 
-    
+    padding-top: 2rem ;
+
+    %participant{
+        font-size: 1.6rem;
+
+    } 
+    &__board{
+        font-size: 3.5rem;
+        margin: .5rem
+    }   
+
+    &__title-participant{
+        @extend%participant;
+        margin-bottom: 1rem;
+    }
+    &__id-participant{
+        @extend%participant;
+        margin-bottom: .2rem;
+    }
+    &__name-participant{
+        @extend%participant;
+        margin-bottom: .2rem;
+    }
+
+    %btn-timer{
+        outline: none;
+        border: none;
+        cursor: pointer; 
+        padding: 10px; 
+        font-size: 24px;
+        border-radius: 5px;
+        color: #fff
+    }
    
     &__list-time{
         list-style: none;
@@ -15,6 +51,50 @@
             transform: translateX(-20%);
         }
     }
+
+    &__buttons{
+        display: flex;
+        
+        &:last-of-type(){
+            margin: auto 0 2rem 0;
+        }
+
+    }
+
+    &__btn{
+
+        &:not(:last-of-type){
+            margin-right: 15px;
+        }
+    
+        &:active{
+            transform: scale(.9);
+        }
+    
+        &-start{
+            @extend%btn-timer;
+            background-color: $bg-color-green;
+        }
+        &-save{
+            @extend%btn;
+            font-size: 2rem;
+        }
+        &-reset{
+            @extend%btn-timer;
+            background-color: $bg-color-orange;
+        }
+        &-stop{
+            @extend%btn-timer;
+            background-color: $bg-color-red;
+        }
+        &-cancel{
+            @extend%btn;
+            font-size: 2rem;
+           
+         
+        }
+    }
+
     // &__board{
     //     overflow: hidden;
     //     background-color: black;
