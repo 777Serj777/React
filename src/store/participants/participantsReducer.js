@@ -11,14 +11,29 @@ const participantsReducer = (state = initState, action) => {
 
     return ({
 
-        [actionType.ADD_USER](){
+        [actionType.REMOVE_PARTICIPANT](){
+            
+            const {id} = payload;
+        
+            let arrParticipants = state.arrParticipants.filter(item => item.id !== id);
+      
             return{
 
-                ...state,
-                users: [
-                    ...state.users,
-                    ...payload
-                ]
+                arrParticipants,
+                amountParticipants:  state.amountParticipants - 1
+               
+            }
+        },
+        [actionType.ADD_PARTICIPANT](){
+      
+            return{
+
+                arrParticipants: [
+                    ...state.arrParticipants,
+                    payload
+                ],
+                amountParticipants: 1 + state.amountParticipants
+               
             }
         }
 

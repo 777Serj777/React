@@ -10,4 +10,8 @@
 
 .btn{
     @extend%btn;
+
+    &-block{
+        background: rgba(192, 189, 189, .5);
+    }
 }

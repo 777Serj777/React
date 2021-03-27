@@ -1,5 +1,6 @@
 const actionType = {
-    ADD_USER: 'ADD_USER',
+    ADD_PARTICIPANT: 'ADD_PARTICIPANT',
+    REMOVE_PARTICIPANT: 'REMOVE_PARTICIPANT',
 }
 
 export default actionType;

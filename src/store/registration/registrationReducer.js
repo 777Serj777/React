@@ -26,6 +26,14 @@ const registrationReducer = (state = initState, action) => {
                 ...payload
             }
         },
+
+        [actionType.RESET_PARTICIPANT](){
+            
+            return{
+                ...initState
+            }
+        },
+
         [actionType.REGISTER_PARTICIPANT](){
 
             let id =  Math.floor(Math.random() * (100000 - 10000) + 10000);

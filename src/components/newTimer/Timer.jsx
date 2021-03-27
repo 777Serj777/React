@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button'
 
 
@@ -42,8 +42,8 @@ const convertToMilliseconds = (time) => {
 const useTimer = (initTime) => {
 
     const [time, setTime] = useState(initTime);
-    let timer;
-  
+    let timer; 
+    
     const startTimer = () => {
 
         let currentTime  =  convertToMilliseconds(time);
@@ -51,14 +51,22 @@ const useTimer = (initTime) => {
         const timeNow = Date.now();
 
         timer = setInterval(() => setTime(startClick(currentTime, timeNow)), 10)
+
     }
 
-    const stopTimer = () => clearInterval(timer)
-    
+    const stopTimer = () =>{
+        clearInterval(timer)
+
+    }
+    const changeTime = (newTime) => {
+        setTime(newTime);
+    }
+
     return {
         time,
         startTimer,
-        stopTimer
+        stopTimer,
+        changeTime
     }
 
 } 
@@ -66,17 +74,17 @@ const useTimer = (initTime) => {
 const Timer = (props) => {
 
     const {id, name, seconName} = useSelector(store => store.registration.participant);
-    const timeStore = useSelector(store => store.timer.time);
-
+    const dispatch = useDispatch();
     const [btnClick, setBtnClick] = useState('');
-    const {time, startTimer, stopTimer} = useTimer(timeStore);
+    const timer = useTimer('00:00:00');
 
 
     useEffect(() => {
 
-        if(btnClick === 'start') startTimer(); 
+        if(btnClick === 'start') timer.startTimer(); 
+        if(btnClick === 'reset') timer.changeTime('00:00:00'); 
 
-        return () => stopTimer();
+        return () => timer.stopTimer();
 
     }, [btnClick])
 
@@ -88,15 +96,45 @@ const Timer = (props) => {
                 <p className = "timer__id-participant">ID: {id}</p>
                 <p className = "timer__name-participant">Participant: {name} {seconName}</p>
             </div>
-            <p className = "timer__board">{time}</p>
+            <p className = "timer__board">{timer.time}</p>
             <div className = "timer__buttons">
-                <Button className = "timer__btn timer__btn-start" onClick = {() => setBtnClick('start') }>Start</Button>
+                <Button 
+                    disabled = {(btnClick === '' || btnClick === 'reset') ? false : true} 
+                    className = "timer__btn timer__btn-start" 
+                    onClick = {() => setBtnClick('start') }
+                >
+                    Start
+                </Button>
                 <Button className = "timer__btn timer__btn-stop"  onClick = {() => setBtnClick('stop') }>Stop</Button>
-                <Button className = "timer__btn timer__btn-reset" onClick = {() => setBtnClick('') }>Reset</Button>         
+                <Button  
+                    disabled = {(btnClick === 'stop') ? false : true}  
+                    className = "timer__btn timer__btn-reset" 
+                    onClick = {() => setBtnClick('reset') }
+                >
+                    Reset
+                </Button>         
             </div> 
             <div className = "timer__buttons">
-                <Button className = "timer__btn timer__btn-save"  onClick = {() => setBtnClick('') }>Save</Button>
-                <Button className = "timer__btn timer__btn-cancel"  onClick = {() => setBtnClick('') }>Cancel</Button>
+                <Button 
+                    disabled = {(btnClick === 'stop' && timer.time !== '00:00:00') ? false : true}   
+                    className = "timer__btn timer__btn-save"  
+                    onClick = {() => {
+                     
+                        dispatch({type: 'ADD_PARTICIPANT', payload: { id, name, time: timer.time}})
+                        dispatch({type: 'RESET_PARTICIPANT'})
+                                  
+                    } }
+                >   
+                    Save
+                </Button>
+                <Button 
+                    className = "timer__btn timer__btn-cancel"  
+                    onClick = {() => {
+                        dispatch({type: 'RESET_PARTICIPANT'});
+                    }}
+                >
+                    Cancel
+                </Button>
             </div>  
         </div>
         

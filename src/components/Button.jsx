@@ -1,9 +1,14 @@
 import React from 'react'
 
-const Button = ({children, ...props}) => {
+const Button = ({children, disabled, className, ...props}) => {
 
     return (
-        <input type = 'button' className = 'btn' defaultValue = {children} {...props} />
+        <input  
+            disabled = {disabled} type = 'button' 
+            className = {`${className ? className : 'btn' }  ${(disabled) ? 'btn-block' : ''}`}  
+            defaultValue = {children} 
+            {...props} 
+        />
     )
 
 }
