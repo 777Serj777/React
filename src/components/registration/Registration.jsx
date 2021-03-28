@@ -65,6 +65,7 @@ export const Registration = (props) => {
                         type: 'REGISTER_PARTICIPANT', 
                         payload: {name: name.value, seconName: seconName.value}
                     })
+                    dispatch({type: 'CHANGE_IS_WINNER_TO_FALSE'})
                 }} 
                 disabled = {validData ? '' : 'disabled'} 
                 className = 'regist__btn'

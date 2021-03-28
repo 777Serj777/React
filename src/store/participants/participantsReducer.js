@@ -2,7 +2,6 @@ import actionType from './actionType'
 
 const initState = {
     arrParticipants: [],
-    amountParticipants: 0
 }
 
 const participantsReducer = (state = initState, action) => {
@@ -20,8 +19,13 @@ const participantsReducer = (state = initState, action) => {
             return{
 
                 arrParticipants,
-                amountParticipants:  state.amountParticipants - 1
-               
+         
+            }
+        },
+        [actionType.CLEAR_ARR_PARTICIPANT](){
+            
+            return {
+                arrParticipants: []
             }
         },
         [actionType.ADD_PARTICIPANT](){
@@ -32,7 +36,7 @@ const participantsReducer = (state = initState, action) => {
                     ...state.arrParticipants,
                     payload
                 ],
-                amountParticipants: 1 + state.amountParticipants
+               
                
             }
         }

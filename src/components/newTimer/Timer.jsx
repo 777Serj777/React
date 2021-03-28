@@ -6,7 +6,7 @@ import Button from '../Button'
 const startClick = (time, startTime) => {
      
     let hour, minute, second; //milliseconds;
-
+    
     let currentTime =  (Date.now() - startTime) + time;
  
     //milliseconds = currentTime % 1000; 
@@ -105,7 +105,13 @@ const Timer = (props) => {
                 >
                     Start
                 </Button>
-                <Button className = "timer__btn timer__btn-stop"  onClick = {() => setBtnClick('stop') }>Stop</Button>
+                <Button 
+                    disabled = {(btnClick === '' || btnClick === 'stop') ? true : false}
+                    className = "timer__btn timer__btn-stop"  
+                    onClick = {() => setBtnClick('stop') }
+                >
+                    Stop
+                </Button>
                 <Button  
                     disabled = {(btnClick === 'stop') ? false : true}  
                     className = "timer__btn timer__btn-reset" 

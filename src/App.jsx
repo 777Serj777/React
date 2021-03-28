@@ -41,7 +41,6 @@ const Wrapper = () => {
   )
 }
 
-
 function App(props) {
 
   const isParticip = useSelector(store => store.registration.isParticip)

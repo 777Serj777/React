@@ -18,7 +18,7 @@ const registrationReducer = (state = initState, action) => {
     const {type, payload} = action;
 
     return ({
-    
+        
      
         [actionType.SET_VALIDATION](){
             return {
